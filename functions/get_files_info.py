@@ -11,7 +11,7 @@ def get_files_info(working_directory, directory="."):
     else:
         print(f"Result for '{directory}' directory:")
 
-    if absolute_path.startswith(os.path.abspath(working_directory)) == False:
+    if not absolute_path.startswith(os.path.abspath(working_directory)):
         return f'   Error: Cannot list "{directory}" as it is outside the permitted working directory'
 
     if os.path.isdir(path) == False:
