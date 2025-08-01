@@ -3,7 +3,8 @@ import os
 def get_files_info(working_directory, directory="."):
     content_list = []
     path = os.path.join(working_directory, directory)
-    absolute_path = os.path.abspath(path)
+    absolute_file_path = os.path.abspath(path)
+    absolute_working_dir = os.path.abspath(working_directory)
     directory_contents = os.listdir(path=path)
 
     if directory == ".":
@@ -11,10 +12,10 @@ def get_files_info(working_directory, directory="."):
     else:
         print(f"Result for '{directory}' directory:")
 
-    if not absolute_path.startswith(os.path.abspath(working_directory)):
+    if not absolute_file_path.startswith(absolute_working_dir):
         return f'   Error: Cannot list "{directory}" as it is outside the permitted working directory'
 
-    if os.path.isdir(path) == False:
+    if not os.path.isdir(path):
         return f'   Error: "{directory}" is not a directory'
     
     try:
