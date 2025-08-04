@@ -1,4 +1,24 @@
 import os
+from google.genai import types
+
+schema_write_file = types.FunctionDeclaration(
+    name="write_file_content",
+    description="Write content to a file within the working directory. Creates the file if it doesn't exist.",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "file_path": types.Schema(
+                type=types.Type.STRING,
+                description="Path to the file to write or overwrite, relative to the working directory.",
+            ),
+            "content": types.Schema(
+                type=types.Type.STRING,
+                description="Content to write to file.",
+            ),
+        },
+        required=["file_path", "content"],
+    ),
+)
 
 def write_file(working_directory, file_path, content):
     path = os.path.join(working_directory, file_path)
@@ -9,7 +29,7 @@ def write_file(working_directory, file_path, content):
     
     if not os.path.exists(absolute_path):
         try:
-            os.mkdir(os.path.dirname(absolute_path, exist_ok=True))
+            os.makedirs(os.path.dirname(absolute_path), exist_ok=True)
         except Exception as e:
             return f'Error: creating directory: {e}'
     
