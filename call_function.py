@@ -16,13 +16,12 @@ available_functions = types.Tool(
 
 def call_function(function_call_part, verbose=False):
     function_name = function_call_part.name
+    function_args = {"working_directory": "calculator", **function_call_part.args}
 
     if verbose:
-        function_args = {"working_directory": "calculator", **function_call_part.args}
-
-        print(f'Calling function: {function_name}({function_args})')
+        print(f'- Calling function: {function_name}({function_args})')
     else:
-        print(f'Calling function: {function_name}')
+        print(f'- Calling function: {function_name}')
 
     function_map = {
         "get_files_info": get_files_info,
@@ -44,7 +43,7 @@ def call_function(function_call_part, verbose=False):
     
     function_result = function_map[function_name](**function_args)
     return types.Content(
-        role="tool",
+        role="user",
         parts=[
             types.Part.from_function_response(
                 name=function_name,

@@ -22,10 +22,10 @@ def get_files_info(working_directory, directory="."):
     absolute_working_dir = os.path.abspath(working_directory)
     directory_contents = os.listdir(path=path)
 
-    if directory == ".":
-        print("Result for current directory:")
-    else:
-        print(f"Result for '{directory}' directory:")
+    # if directory == ".":
+    #     print("Result for current directory:")
+    # else:
+    #     print(f"Result for '{directory}' directory:")
 
     if not absolute_file_path.startswith(absolute_working_dir):
         return f'   Error: Cannot list "{directory}" as it is outside the permitted working directory'

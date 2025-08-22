@@ -2,7 +2,7 @@ import os
 from google.genai import types
 
 schema_write_file = types.FunctionDeclaration(
-    name="write_file_content",
+    name="write_file",
     description="Write content to a file within the working directory. Creates the file if it doesn't exist.",
     parameters=types.Schema(
         type=types.Type.OBJECT,
